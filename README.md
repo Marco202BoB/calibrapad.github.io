@@ -1,118 +1,120 @@
-# DualShock Calibration GUI
+Strumento di calibrazione basato sul web per controller PlayStation DualShock 4, DualSense e DualSense Edge tramite API WebHID.
 
-A web-based calibration tool for PlayStation DualShock 4, DualSense, and DualSense Edge controllers using the WebHID API.
+La versione live di questo progetto è disponibile su https://dualshock-tools.github.io.
 
-The live version of this project is available at [https://dualshock-tools.github.io](https://dualshock-tools.github.io).
+Non è richiesta alcuna installazione: basta aprire il sito web in un browser compatibile con WebHID.
 
-No installation is required: simply open the website in a WebHID-compatible browser.
+Funzionalità
+Connessione del controller tramite API WebHID
 
-## Features
+Calibrazione degli stick e calibrazione dell'escursione (range)
 
-- Controller connection via WebHID API
-- Stick calibration and range calibration
-- Input testing and visualization
-- Battery status display
-- Multi-language support (20+ languages)
-- Progressive Web App capabilities
+Test e visualizzazione degli input
 
-## Docker
+Indicazione dello stato della batteria
 
-A pre-built Docker image is available for running DualShock Tools without installing any dependencies.
+Supporto multilingua (oltre 20 lingue)
 
-See the [Docker guide](DOCKER.md) for installation and usage instructions.
+Funzionalità Progressive Web App
 
-## Contributing
+Docker
+È disponibile un'immagine Docker precompilata per eseguire DualShock Tools senza installare alcuna dipendenza.
 
-Interested in contributing? Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on submitting changes and pull requests.
+Consulta la guida a Docker per le istruzioni di installazione e utilizzo.
 
-## Development
+Contribuire
+Ti interessa contribuire? Leggi CONTRIBUTING.md per le linee guida sull'invio di modifiche e pull request.
 
-### Prerequisites
+Sviluppo
+Prerequisiti
+Node.js v20 o superiore (consigliata la v26 — vedi .nvmrc). Le versioni precedenti (14, 16, 18) faranno fallire la compilazione; la toolchain richiede Node 20+.
 
-- Node.js v20 or higher (v26 recommended — see `.nvmrc`). Older versions (14, 16, 18) will fail the build; the toolchain requires Node 20+.
-- npm or yarn
-- Modern browser with WebHID support (Chrome/Edge)
+npm o yarn
 
-If you use [nvm](https://github.com/nvm-sh/nvm), run `nvm install && nvm use` in the project root to pick up the version from `.nvmrc`.
+Browser moderno con supporto WebHID (Chrome/Edge)
 
-### Getting Started
+Se usi nvm, esegui nvm install && nvm use nella cartella principale del progetto per caricare la versione indicata in .nvmrc.
 
-1. **Install dependencies:**
+Per iniziare
+Installa le dipendenze:
 
-   ```bash
-   npm install
-   ```
+Bash
+npm install
+Compila l'applicazione:
 
-2. **Build the application:**
+Bash
+npm run build
+Avvia il server di sviluppo:
 
-   ```bash
-   npm run build
-   ```
+Bash
+npm run start
+L'app sarà disponibile su http://localhost:8080. WebHID funziona qui perché
+localhost viene trattato come un contesto sicuro.
 
-3. **Start the development server:**
+Docker
+In alternativa, compila ed esegui senza installare Node:
 
-   ```bash
-   npm run start
-   ```
-
-   The app will be available at `http://localhost:8080`. WebHID works here because
-   `localhost` is treated as a secure context.
-
-### Docker
-
-Alternatively, build and run without installing Node:
-
-```bash
+Bash
 docker compose up --build
-```
+L'app sarà quindi disponibile su http://localhost:8080.
 
-The app is then available at `http://localhost:8080`.
+Script di sviluppo
+npm run build - Compila l'applicazione per lo sviluppo
 
-### Development Scripts
+npm run build:prod - Compila l'applicazione per la produzione
 
-- `npm run build` - Build the application for development
-- `npm run build:prod` - Build the application for production
-- `npm run clean` - Clean the dist directory
-- `npm run serve` - Serve the built app over HTTP at `http://localhost:8080` (WebHID works on localhost)
-- `npm run start` - Build and serve the app
-- `npm run dev:full` - Build, watch for changes, and serve with auto-reload
-- `npm run watch` - Watch for file changes and rebuild
+npm run clean - Pulisce la directory dist
 
-### Development Workflow
+npm run serve - Avvia l'app compilata su HTTP all'indirizzo http://localhost:8080 (WebHID funziona su localhost)
 
-For active development with auto-rebuild:
+npm run start - Compila e avvia l'app
 
-```bash
+npm run dev:full - Compila, monitora le modifiche e avvia con ricaricamento automatico
+
+npm run watch - Monitora le modifiche ai file e ricompila
+
+Flusso di lavoro di sviluppo
+Per lo sviluppo attivo con ricompilazione automatica:
+
+Bash
 npm run dev:full
-```
+Questo comando:
 
-This will:
+Compila l'applicazione
 
-1. Build the application
-2. Start watching for file changes
-3. Serve the app at `http://localhost:8080`
-4. Automatically rebuild when files change
+Avvia il monitoraggio delle modifiche ai file
 
-### Important Notes
+Avvia l'app su http://localhost:8080
 
-- **WebHID & secure contexts**: WebHID requires a secure context. `localhost` counts as secure, so the HTTP dev server (`http://localhost:8080`) works for local development. Reaching the app from another device would need HTTPS — use the production site for that.
-- **Controller Support**: Only works in browsers with WebHID support (Chrome, Edge, Opera).
+Ricompila automaticamente quando i file cambiano
 
-### Project Structure
+Note importanti
+WebHID e contesti sicuri: WebHID richiede un contesto sicuro. localhost è considerato sicuro, quindi il server di sviluppo HTTP (http://localhost:8080) funziona per lo sviluppo locale. Per raggiungere l'app da un altro dispositivo serve HTTPS — per questo usa il sito di produzione.
 
-- `js/` - Source JavaScript files
-- `scss/` - Source SCSS files
-- `templates/` - HTML template files
-- `lang/` - Translation files
-- `assets/` - SVG assets
-- `dist/` - Built application (generated)
+Supporto controller: Funziona solo nei browser con supporto WebHID (Chrome, Edge, Opera).
 
-### Build System
+Struttura del progetto
+js/ - File JavaScript sorgente
 
-The project uses Gulp for building:
+scss/ - File SCSS sorgente
 
-- JavaScript bundling with Rollup
-- SCSS concatenation and minification
-- HTML processing and minification
-- Asset optimization
-- Development vs production builds
+templates/ - File template HTML
+
+lang/ - File di traduzione
+
+assets/ - Risorse SVG
+
+dist/ - Applicazione compilata (generata)
+
+Sistema di compilazione
+Il progetto usa Gulp per la compilazione:
+
+Bundling JavaScript con Rollup
+
+Concatenazione e minimizzazione SCSS
+
+Elaborazione e minimizzazione HTML
+
+Ottimizzazione delle risorse
+
+Build di sviluppo e di produzione
